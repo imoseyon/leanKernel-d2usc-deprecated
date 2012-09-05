@@ -2717,9 +2717,7 @@ exit:
 	dhd->pub.hang_was_sent = 0;
 	dhd->pub.rxcnt_timeout = 0;
 	dhd->pub.txcnt_timeout = 0;
-#ifdef BCM4334_CHIP
-	dhd->pub.tx_seqerr_cnt = 0;
-#endif
+
 	DHD_OS_WAKE_UNLOCK(&dhd->pub);
 	return 0;
 }

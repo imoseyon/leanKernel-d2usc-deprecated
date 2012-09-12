@@ -9,6 +9,7 @@ find drivers -name "*.ko" | xargs -i cp {} zip/system/lib/modules/
 cd lk.ramdisk
 chmod 750 init*
 chmod 644 default* uevent* MSM*
+chmod 755 sbin
 find . | cpio -o -H newc | gzip > /tmp/ramdisk.img
 cd ../
 

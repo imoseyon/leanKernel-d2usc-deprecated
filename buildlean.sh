@@ -1,4 +1,8 @@
 #!/bin/bash
+prefix="lk_tw_ics"
+device="usc"
+filename="${prefix}_${device}-v${1}.zip"
+
 [[ `diff arch/arm/configs/lk_defconfig .config ` ]] && \
         { echo "Unmatched defconfig!"; exit -1; }
 [[ $2 == "compile" ]] &&
@@ -16,6 +20,8 @@ cd ../
 /data/unpack-mkbootimg/mkbootimg --cmdline 'console=null androidboot.hardware=qcom user_debug=31' --base 0x80200000 --ramdiskaddr 0x81500000 --kernel arch/arm/boot/zImage --ramdisk /tmp/ramdisk.img -o zip/boot.img
 
 cd zip
-zip -r /tmp/lk_tw_usc_beta-v${1}.zip *
-[[ $2 == "upload" ]] && scp -P 2222 /tmp/lk_tw_usc_beta-v${1}.zip imoseyon@upload.goo.im:public_html/d2usc
-md5sum /tmp/lk_tw_usc_beta-v${1}.zip
+zip -r $filename *
+mv $filename /tmp
+[[ $2 == "upload" ]] && /data/utils/s3_ftpupload.sh $1
+echo
+md5sum /tmp/$filename

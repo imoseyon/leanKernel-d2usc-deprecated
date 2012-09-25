@@ -16,4 +16,6 @@ cd ../
 /data/unpack-mkbootimg/mkbootimg --cmdline 'console=null androidboot.hardware=qcom user_debug=31' --base 0x80200000 --ramdiskaddr 0x81500000 --kernel arch/arm/boot/zImage --ramdisk /tmp/ramdisk.img -o zip/boot.img
 
 cd zip
-zip -r /tmp/lk_tw_beta-v${1}_r530.zip *
+zip -r /tmp/lk_tw_usc_beta-v${1}.zip *
+[[ $2 == "upload" ]] && scp -P 2222 /tmp/lk_tw_usc_beta-v${1}.zip imoseyon@upload.goo.im:public_html/d2usc
+md5sum /tmp/lk_tw_usc_beta-v${1}.zip

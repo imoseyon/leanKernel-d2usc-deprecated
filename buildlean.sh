@@ -14,6 +14,7 @@ cd lk.ramdisk
 chmod 750 init*
 chmod 644 default* uevent* MSM*
 chmod 755 sbin
+chmod 700 sbin/lkflash sbin/lkconfig
 find . | cpio -o -H newc | gzip > /tmp/ramdisk.img
 cd ../
 
